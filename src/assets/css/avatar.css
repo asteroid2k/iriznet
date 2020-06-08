@@ -1,0 +1,17 @@
+#prev {
+        border-radius: 20%;
+        border: 3px solid #ddd;
+        padding: "5px";
+        margin: 2px;
+        max-width: 140px;
+        max-height: 140px;
+}
+
+#prev:hover {
+        box-shadow: 0 0 3px 2px rgba(5, 5, 5, 5);
+}
+
+#avatar {
+        width: 100px;
+        height: 100px;
+}
