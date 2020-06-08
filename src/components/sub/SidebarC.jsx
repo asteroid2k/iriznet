@@ -34,7 +34,7 @@ class SidebarC extends Component {
   }
   componentDidMount() {
     setTimeout(() => this.getLiveCount(), 2000);
-    this.timer = setInterval(() => this.getLiveCount(), 6000);
+    this.timer = setInterval(() => this.getLiveCount(), 10000);
   }
   componentWillUnmount() {
     clearInterval(this.timer);

@@ -7,16 +7,15 @@ import gearicon from "assets/icons/gear-fill.svg";
 import mvatar from "assets/icons/man.png";
 import fvatar from "assets/icons/girl.png";
 import nvatar from "assets/icons/nvatar.png";
+import Cookies from "js-cookie";
 
 class NavbarC extends Component {
-  state = {
-    sex: "",
-    title: "",
-    username: "",
-  };
+  state = { username: "", sex: "", title: "" };
   componentDidMount() {
-    const { sex, tle, usn } = this.props;
-    this.setState({ sex: sex, title: tle, username: usn });
+    const { username, sex, title } = Cookies.getJSON("info");
+    console.log(Cookies.getJSON("info"));
+
+    this.setState({ username: username, sex: sex, title: title });
   }
 
   toggle = (event) => {
@@ -64,9 +63,9 @@ class NavbarC extends Component {
               <li className="nav-item ">
                 <img
                   src={
-                    this.props.info.sex === "Male"
+                    this.state.sex === "Male"
                       ? mvatar
-                      : this.props.info.sex === "Female"
+                      : this.state.sex === "Female"
                       ? fvatar
                       : nvatar
                   }
@@ -86,7 +85,7 @@ class NavbarC extends Component {
                   aria-expanded="false"
                 >
                   <span style={{ fontSize: "1.1em", fontWeight: "bold" }}>
-                    {this.props.info.title} {this.props.info.username}
+                    {this.state.title} {this.state.username}
                   </span>
                 </a>
                 <div
@@ -94,7 +93,7 @@ class NavbarC extends Component {
                   aria-labelledby="navbarDropdown"
                 >
                   <p className="dropdown-header">
-                    Hi {this.props.info.title + this.props.info.username}.
+                    Hi {this.state.title + this.state.username}.
                   </p>
                   <div className="dropdown-divider"></div>
                   <a

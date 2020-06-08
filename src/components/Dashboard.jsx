@@ -70,19 +70,25 @@ class Dashboard extends Component {
         if (!response.data.ID) {
           return;
         }
+        let { title, sex, first_name, role } = response.data;
         Cookies.set("role", response.data.role);
         this.setState({
-          title: response.data.title
-            ? response.data.title
-            : response.data.sex === "Male"
+          title: title
+            ? title
+            : sex === "Male"
             ? "Mr."
-            : response.data.sex === "Female"
+            : sex === "Female"
             ? "Mrs."
             : "",
-          sex: response.data.sex,
-          role: response.data.role,
-          username: response.data.first_name,
+          sex: sex,
+          role: role,
+          username: first_name,
           gotUser: true,
+        });
+        Cookies.set("info", {
+          sex: sex,
+          title: title,
+          username: first_name,
         });
       })
       .catch((error) => {
@@ -107,6 +113,7 @@ class Dashboard extends Component {
     this.setState({
       toggled: !this.state.toggled,
     });
+
     axios
       .get("attendancelogs/recent", config)
       .then((response) => {
@@ -152,13 +159,7 @@ class Dashboard extends Component {
             <SidebarC role={this.state.role}></SidebarC>
 
             <div id="page-content-wrapper">
-              <Navbar
-                info={{
-                  title: this.state.title,
-                  sex: this.state.sex,
-                  username: this.state.username,
-                }}
-              ></Navbar>
+              <Navbar></Navbar>
 
               <div className="container-fluid col-9" id="mainarea">
                 <div
